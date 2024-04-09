@@ -1,31 +1,14 @@
 import React, { useContext } from "react";
+import actions from "../../store/usersCompare/action";
+import { actionCreator } from "../../store/actionCreater";
 import FormContext from "../../contexts/contextForm/FormContext";
 
 export default function Resset() {
-  const {
-    firstUser,
-    secondUser,
-    setFirstUser,
-    setSecondUser,
-    setClearUser,
-    setIsActive_Butle,
-    setuserRow1,
-    setuserRow2,
-  } = useContext(FormContext);
+  const { state, dispatch } = useContext(FormContext);
 
   const handleResset = () => {
-    setFirstUser("");
-    setSecondUser("");
-    setClearUser("delete");
-    setIsActive_Butle("");
-    setuserRow1("");
-    setuserRow2("");
+    dispatch(actionCreator(actions.DELETE));
   };
 
-  return (
-    firstUser.repositories_stars &&
-    secondUser.repositories_stars && (
-      <button onClick={handleResset}>Resset</button>
-    )
-  );
+  return state.listIsActive && <button onClick={handleResset}>Resset</button>;
 }
